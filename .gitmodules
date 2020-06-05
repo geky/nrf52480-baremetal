@@ -1,0 +1,6 @@
+[submodule "cmsis"]
+	path = cmsis
+	url = https://github.com/ARM-software/CMSIS_5
+[submodule "nrfx"]
+	path = nrfx
+	url = https://github.com/NordicSemiconductor/nrfx
