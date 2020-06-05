@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <assert.h>
+#include <nrfx_clock.h>
 #include <nrfx_uarte.h>
 
 // uart config, note that Nordic's UARTE DMA does not
@@ -49,9 +50,18 @@ int _write(int handle, char *buffer, int size) {
     }
 }
 
+// hook for clock init callback.
+void clock_handler(nrfx_clock_evt_type_t event) {}
+
 // entry point
 void main(void) {
-    nrfx_err_t err = nrfx_uarte_init(&uart, &uart_config, NULL);
+    // setup LCLK
+    nrfx_err_t err = nrfx_clock_init(clock_handler);
+    assert(err == NRFX_SUCCESS);
+    nrfx_clock_start(NRF_CLOCK_DOMAIN_LFCLK);
+
+    // setup UARTE
+    err = nrfx_uarte_init(&uart, &uart_config, NULL);
     assert(err == NRFX_SUCCESS);
 
     printf("Hi from nrf52840!\n");

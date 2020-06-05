@@ -42,6 +42,7 @@ override CFLAGS += -Os
 override CFLAGS += -flto
 endif
 override CFLAGS += -DNRF52840_XXAA
+override CFLAGS += -DNRFX_CLOCK_ENABLED=1
 override CFLAGS += -DNRFX_UARTE_ENABLED=1
 override CFLAGS += -DNRFX_UARTE0_ENABLED=1
 override CFLAGS += -mthumb
